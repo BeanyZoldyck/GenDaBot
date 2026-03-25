@@ -1,3 +1,4 @@
+import os
 from functools import reduce
 
 import cohere
@@ -5,6 +6,7 @@ import torch
 import torch.nn as nn
 from nltk.tokenize import TweetTokenizer
 
+COHERE_SECRET_KEY = os.environ.get("COHERE_KEY_1")
 co = cohere.Client(COHERE_SECRET_KEY)
 
 

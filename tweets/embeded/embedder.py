@@ -40,6 +40,7 @@ findCos = lambda vec1, vec2: dot(vec1.rep, vec2.rep) / (mag(vec1.rep) * mag(vec2
 findDis = lambda vec1, vec2: mag(vec1 - vec2)
 tknzr = TweetTokenizer(preserve_case=False, reduce_len=True)
 blankVec64 = Vec([0] * 64)
+COHERE_SECRET_KEY = os.environ.get("COHERE_KEY_2")
 co = cohere.Client(COHERE_SECRET_KEY)
 
 
