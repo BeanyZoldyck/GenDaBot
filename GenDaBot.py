@@ -1,11 +1,11 @@
 import os
 from functools import reduce
-
+import dotenv
 import cohere
 import torch
 import torch.nn as nn
 from nltk.tokenize import TweetTokenizer
-
+dotenv.load_dotenv()
 COHERE_SECRET_KEY = os.environ.get("COHERE_KEY_1")
 co = cohere.Client(COHERE_SECRET_KEY)
 
@@ -60,17 +60,17 @@ def invSigmoid(x):
 
 paf = r"D:\`\embeddings.csv"
 word2Vec = {}
-with open(paf, "rb") as f:
-    listOfVecs = f.readlines()
-    f.close()
-    for line in listOfVecs:
-        listed = line.split(b",")
-        try:
-            word2Vec[listed[0].decode("utf-8")] = Vec(list(map(float, listed[1:])))
-        except ValueError:
-            word2Vec[listed[0]] = Vec(
-                list(map(float, listed[2:]))
-            )  # word2Vec[listed[0]] = list(map(float,listed[2:]))
+# with open(paf, "rb") as f:
+#     listOfVecs = f.readlines()
+#     f.close()
+#     for line in listOfVecs:
+#         listed = line.split(b",")
+#         try:
+#             word2Vec[listed[0].decode("utf-8")] = Vec(list(map(float, listed[1:])))
+#         except ValueError:
+#             word2Vec[listed[0]] = Vec(
+#                 list(map(float, listed[2:]))
+#             )  # word2Vec[listed[0]] = list(map(float,listed[2:]))
 
 
 def GenDaBot(tweet):
