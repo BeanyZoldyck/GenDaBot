@@ -9,7 +9,6 @@ dotenv.load_dotenv()
 COHERE_SECRET_KEY = os.environ.get("COHERE_KEY_1")
 co = cohere.Client(COHERE_SECRET_KEY)
 
-
 class Vec:
     def __init__(self, rep):
         self.rep = rep
@@ -36,6 +35,8 @@ class LogisticRegression(nn.Module):
         yPred = torch.sigmoid(self.linear(x))
         return yPred
 
+
+torch.serialization.add_safe_globals([LogisticRegression])
 
 class LinearNetwork(nn.Module):
     def __init__(self):
@@ -100,7 +101,7 @@ def GenDaBot(tweet):
 def GenDaBotexp(tweet):
     if not tweet:
         return 0.50001
-    model = torch.load("model74.pt")
+    model = torch.load("model74.pt", weights_only=False)
     model.eval()
     embed = co.embed(texts=[tweet], model="embed-english-v2.0").embeddings
     with torch.no_grad():
@@ -109,7 +110,8 @@ def GenDaBotexp(tweet):
 
 
 def appraise(flt):
-    return (round(2 * abs(0.5 - flt), 2) * 100, round(flt), flt)
+    print(2 * abs(0.5 - flt), 2)
+    return (round(float(2 * abs(0.5 - flt)),2) * 100, round(float(flt)), flt)
 
 
 if __name__ == "__main__":
