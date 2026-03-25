@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import os
 import torch
 import torch.nn as nn
@@ -58,7 +57,8 @@ class LogisticRegression(nn.Module):
         super(LogisticRegression,self).__init__()
         self.linear = nn.Linear(nInputFeatures, 1)
         
-
+        #ADD MORE LAYERS, THIS MODEL IS A PERCEPTRON
+        #I used to be surrounded by real deep learners...
     def forward(self, x):
         yPred = torch.sigmoid(self.linear(x))
         return yPred

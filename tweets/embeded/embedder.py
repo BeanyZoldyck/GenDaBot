@@ -22,9 +22,9 @@ class Vec:
         return self.__mul__(self, b)  # Vec([i*b for i in self.rep])
 
 
-paf = r"D:\`\embeddings.csv"
+paf = "D:\\`\\embedded\\embeddings.csv"
 word2Vec = {}
-with open(paf, "rb") as f:
+with open(paf, "rb") as f:  # doesnt this err? returns list of b''
     listOfVecs = f.readlines()
     f.close()
     for line in listOfVecs:
@@ -35,6 +35,7 @@ with open(paf, "rb") as f:
             word2Vec[listed[0]] = Vec(
                 list(map(float, listed[2:]))
             )  # word2Vec[listed[0]] = list(map(float,listed[2:]))
+biggest = lambda arr: max(max(arr), abs(min(arr)))
 mag = lambda vec: (sum(map(lambda r: r**2, vec))) ** 0.5
 findCos = lambda vec1, vec2: dot(vec1.rep, vec2.rep) / (mag(vec1.rep) * mag(vec2.rep))
 findDis = lambda vec1, vec2: mag(vec1 - vec2)
@@ -96,9 +97,21 @@ def embed2(file, sex):
 def parse(file):
     with open(file) as f:
         vecs = f.readlines()
-        input(vecs[1:3])
+        superMat = []
         for vec in vecs:
             fltList = vec.split(" ")
+            fltList = vec[1:-2].split(", ")
+            fltList = list(map(lambda x: float(x), fltList))
+            maxFlt = biggest(fltList)
+            fltList = list(map(lambda x: round(x / maxFlt, 8), fltList))
+            superMat.append(" ".join(map(lambda x: str(x), fltList)) + "\n")
+        f.close()
+    with open(file, "w") as r:
+        r.writelines(superMat)
+        r.close()
+    print(f"Normalized {file[16:]}")
+    if "aminacuore" in file:
+        input()
 
 
 def sortLict(dic):
@@ -111,12 +124,9 @@ def succ():
     lengthNotUsed += 1
 
 
-# embed(r"C:\Users\chuka\Documents\GitHub\MTAG\Chuck.txt","m")
 # input('done')
 if __name__ == "__main__":
     for sex in ["fem", "man"]:
-        for i, _, j in os.walk(
-            "C:\\Users\\chuka\\Documents\\GitHub\\GenDaBot\\tweets\\" + sex
-        ):
+        for i, _, j in os.walk(paf + sex[0]):
             for k in j:
-                embed2(os.path.join(i, k), sex[0])
+                parse(os.path.join(i, k))

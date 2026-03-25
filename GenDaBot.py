@@ -102,7 +102,7 @@ def GenDaBotexp(tweet):
         return 0.50001
     model = torch.load("model74.pt")
     model.eval()
-    embed = co.embed([tweet]).embeddings
+    embed = co.embed(texts=[tweet], model="embed-english-v2.0").embeddings
     with torch.no_grad():
         confidence = model(torch.tensor(embed))
         return confidence

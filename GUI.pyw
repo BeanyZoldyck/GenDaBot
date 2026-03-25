@@ -1,9 +1,12 @@
-from GenDaBot import GenDaBot, appraise, LinearNetwork
+from GenDaBot import GenDaBot, GenDaBotexp, appraise, LinearNetwork,LogisticRegression
 import tkinter as tk
-
+sentenceEmbed = True
 def processInput(EVENT):
     inputText = inputEntry.get()
-    conf = GenDaBotexp(inputText)
+    if sentenceEmbed:
+        conf = GenDaBotexp(inputText)
+    else:
+        conf = GenDaBot(inputText)
     cert, ans, flt = appraise(conf)
     outputText = f'This was tweeted by a {["female","male"][ans]} ({cert:.2f}% confidence)'
     outputLabel.config(text=outputText)
@@ -17,15 +20,15 @@ def processInput(EVENT):
     #slider.configure(troughcolor=f"{'pink' if val == 0 else 'blue'}")
 # Create the main window
 window = tk.Tk()
-window.title("Gen Da Bot")
+window.title("Gen Da Bot 1."+['0','1'][sentenceEmbed])
 window.geometry("300x150")  # Set the window size
 
 # Create input label and entry
 inputLabel = tk.Label(window, text="Enter text:")
 inputLabel.pack(padx=10, pady=10)
-inputEntry = tk.Entry(window, width=50)
+inputEntry = tk.Entry(window, width=100)
 inputEntry.pack(padx=10, pady=10)
-inputEntry.bind("<KeyRelease>", processInput)
+inputEntry.bind("<Return>", processInput)
 # Create output label
 outputLabel = tk.Label(window, width=100, text="")
 outputLabel.pack()
