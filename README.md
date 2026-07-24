@@ -5,12 +5,12 @@ Machine Learning Project made with PyTorch that classifies the sex of tweet auth
 
 [![Example usage](Untitled.png)]()
 [![Example usage 2](msgs.png)]()
+[video demo](https://drive.google.com/file/d/1RiSLn5NpKlgGKRfogq2RFSQl14jVAaX4/view)
 
 
 ## Quickstart
 To run this yourself, you'll need a cohere API key and a modern python installation
 
-[video demo](https://drive.google.com/file/d/1RiSLn5NpKlgGKRfogq2RFSQl14jVAaX4/view)
 # In .env
 COHERE_KEY_1=<your_key>
 
