@@ -18,7 +18,8 @@ Clone the repo
 `git clone https://github.com/BeanyZoldyck/GenDaBot.git`
 `cd GenDaBot`
 
-(optional) set up virtual environment
+(optional) Set up virtual environment
+
 `python3 -m venv venv`
 
 Install dependencies
