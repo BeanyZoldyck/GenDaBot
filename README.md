@@ -19,6 +19,9 @@ Clone the repo
 `cd GenDaBot`
 
 Install dependencies
+`#optional, set up virtual environment
+python3 -m venv venv`
+
 `pip install -r requirements.txt`
 
 run the GUI
